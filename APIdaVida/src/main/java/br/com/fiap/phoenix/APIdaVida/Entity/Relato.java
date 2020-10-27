@@ -1,5 +1,6 @@
 package br.com.fiap.phoenix.APIdaVida.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Relato {
@@ -44,9 +46,9 @@ public class Relato {
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "relato_seq")
-	//@SequenceGenerator(name = "relato_seq", sequenceName = "relato_sequence", allocationSize = 1)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "relato_seq")
+	@SequenceGenerator(name = "relato_seq", sequenceName = "relato_sequence", allocationSize = 1)
 	@Column(name = "id_relato")
 	private long id;
 	@Column(name = "nm_tema", length = 200, nullable = false)
@@ -56,11 +58,9 @@ public class Relato {
 	@Column(name = "nm_texto", length = 4000,nullable = false)
 	private String texto;
 	
-	@ManyToOne
-	//@JoinColumn(name = "id_usuario")
-	private Usuario usuarioId;
-
-	/**
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_usuario")
+	private Usuario usuarioId;	/**
 	 * @return the id
 	 */
 	public long getId() {

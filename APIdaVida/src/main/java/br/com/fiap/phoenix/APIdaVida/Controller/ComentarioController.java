@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,11 +26,11 @@ public class ComentarioController {
 	@Autowired
 	private ComentarioService service;
 	
-	@RequestMapping("/comentarios")
+	@GetMapping
 	public List<Comentario> getComentarios(){
 		return service.getAllComentarios();
 	}
-	@PostMapping("/comentario")
+	@PostMapping
 	public String save(@Valid @RequestBody Comentario comentario, BindingResult result) {
 		if(result.hasErrors()) {
 			return "Houve um error";
@@ -37,13 +38,13 @@ public class ComentarioController {
 		service.save(comentario);
 		return  " Comentario Cadastrado com sucesso";
 	}
-	@PutMapping("/comentario/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Comentario> updateRelato(@PathVariable long id,
 			@Valid @RequestBody  Comentario comentarioDetails){
 		
 		return service.updateComentario(id, comentarioDetails);
 	}
-	@DeleteMapping("/comentario/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteRelato(@PathVariable long id){
 		return service.delete(id);
 	}

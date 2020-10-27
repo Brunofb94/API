@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.phoenix.APIdaVida.Entity.Relato;
+import br.com.fiap.phoenix.APIdaVida.Entity.Usuario;
 import br.com.fiap.phoenix.APIdaVida.Repository.RelatoRepository;
 
 @Service
@@ -45,8 +46,5 @@ public class RelatoService {
 				return ResponseEntity.ok().build();
         }).orElse(ResponseEntity.notFound().build());
 	}
-	
-	
-	
 	
 }

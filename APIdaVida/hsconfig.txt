@@ -1,0 +1,26 @@
+# create and drop tables
+spring.jpa.hibernate.ddl-auto=create-drop
+
+# Oracle settings
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=system
+spring.datasource.password=password
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+
+
+
+# datasource
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:APIdaVida
+spring.datasource.username=sa
+spring.datasource.password=
+
+# jpa
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+
+# h2
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+
