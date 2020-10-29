@@ -33,9 +33,9 @@ public class Comentario {
 		this.artigoId = artigoId;
 	}
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "comentario_seq")
-	@SequenceGenerator(name = "comentario_seq", sequenceName = "comentario_sequence")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "comentario_seq")
+	//@SequenceGenerator(name = "comentario_seq", sequenceName = "comentario_sequence")
 	private long id;
 	@Column(name = "nm_texto", length = 500, nullable = false)
 	private String texto;

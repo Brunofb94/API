@@ -1,20 +1,33 @@
 package br.com.fiap.phoenix.APIdaVida.Entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.sun.istack.NotNull;
 
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */
@@ -33,7 +46,7 @@ public class Usuario {
 	 * @param email
 	 * @param senha
 	 */
-	public Usuario(long id, String nome, String sobrenome, Date  dataNascimento, String documento, int anoFormacao,
+	public Usuario(Long id, String nome, String sobrenome, Date  dataNascimento, String documento, int anoFormacao,
 			String especialidade, boolean admin, String email, String senha) {
 		super();
 		this.id = id;
@@ -50,11 +63,11 @@ public class Usuario {
 	
 	
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "usuario_seq")
-	@SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_sequence", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "usuario_seq")
+	//@SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_sequence", allocationSize = 1)
 	@Column(name = "id_usuario")
-	private long id;
+	private Long id;
 	
 	@Column(name = "nm_nome", length = 100, nullable = false)
 	@NotEmpty 
@@ -88,6 +101,9 @@ public class Usuario {
 	@Column(name = "ds_senha", length = 100)
 	@NotEmpty @NotNull
 	private String senha;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Role> roles = new ArrayList<Role>();
 	/**
 	 * @return the admin
 	 */
@@ -103,13 +119,13 @@ public class Usuario {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
@@ -207,6 +223,55 @@ public class Usuario {
 	 */
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return this.roles;
+	}
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.senha;
+	}
+	
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	/**
+	 * @return the roles
+	 */
+	public List<Role> getRoles() {
+		return roles;
+	}
+	/**
+	 * @param roles the roles to set
+	 */
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 	
 	

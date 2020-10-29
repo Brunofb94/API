@@ -5,6 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +24,6 @@ public class UsuarioService {
 	public List<Usuario> GetAllUsuarios(){
 		return usuarioRepo.findAll();
 	}
-	
 	
 	public void createUsuario(Usuario usuario) {
 		usuarioRepo.save(usuario);
