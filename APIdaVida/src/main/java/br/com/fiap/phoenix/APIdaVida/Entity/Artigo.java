@@ -33,9 +33,9 @@ public class Artigo {
 		this.usuarioId = usuarioId;
 	}
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "artigo_seq")
-	@SequenceGenerator(name = "artigo_seq", sequenceName = "artigo_sequence")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "artigo_seq")
+	//@SequenceGenerator(name = "artigo_seq", sequenceName = "artigo_sequence")
 	private long id;
 	@Column(name = "nm_titulo", length = 200, nullable = false)
 	private String titulo;

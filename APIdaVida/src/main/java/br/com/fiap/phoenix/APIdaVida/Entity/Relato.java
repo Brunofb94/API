@@ -46,9 +46,9 @@ public class Relato {
 
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "relato_seq")
-	@SequenceGenerator(name = "relato_seq", sequenceName = "relato_sequence", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "relato_seq")
+	//@SequenceGenerator(name = "relato_seq", sequenceName = "relato_sequence", allocationSize = 1)
 	@Column(name = "id_relato")
 	private long id;
 	@Column(name = "nm_tema", length = 200, nullable = false)
