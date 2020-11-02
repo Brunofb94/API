@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.phoenix.APIdaVida.DTO.ComentarioDTO;
 import br.com.fiap.phoenix.APIdaVida.Entity.Comentario;
 import br.com.fiap.phoenix.APIdaVida.Service.ComentarioService;
 
@@ -27,9 +28,14 @@ public class ComentarioController {
 	private ComentarioService service;
 	
 	@GetMapping
-	public List<Comentario> getComentarios(){
+	public List<ComentarioDTO> getComentarios(){
 		return service.getAllComentarios();
 	}
+	@GetMapping("/{id}")
+	public List<ComentarioDTO> getByid(@PathVariable(value = "id") long id){
+		return service.getById(id);
+	}
+	
 	@PostMapping
 	public String save(@Valid @RequestBody Comentario comentario, BindingResult result) {
 		if(result.hasErrors()) {

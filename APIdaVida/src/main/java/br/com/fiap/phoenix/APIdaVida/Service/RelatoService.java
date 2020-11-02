@@ -1,13 +1,14 @@
 package br.com.fiap.phoenix.APIdaVida.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.fiap.phoenix.APIdaVida.DTO.RelatoDTO;
 import br.com.fiap.phoenix.APIdaVida.Entity.Relato;
-import br.com.fiap.phoenix.APIdaVida.Entity.Usuario;
 import br.com.fiap.phoenix.APIdaVida.Repository.RelatoRepository;
 
 @Service
@@ -16,9 +17,17 @@ public class RelatoService {
 	@Autowired
 	private RelatoRepository relatoRepo;
 	
-	public List<Relato> AllRelatos(){
+	public List<RelatoDTO> AllRelatos(){
 		
-			return relatoRepo.findAll();	
+			return RelatoDTO.converter(relatoRepo.findAll());
+	}
+	public List<RelatoDTO> getById( Long id){
+		Optional<Relato> use = relatoRepo.findById(id);
+
+		if(use.isPresent()) {
+			return RelatoDTO.converterID(relatoRepo.findById(id));
+		}
+		return null;
 	}
 	
 	public void save(Relato relato) {

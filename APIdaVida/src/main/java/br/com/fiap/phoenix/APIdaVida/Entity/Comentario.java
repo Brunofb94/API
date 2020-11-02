@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_comentario")
 public class Comentario {
 
 	/**
@@ -33,17 +35,22 @@ public class Comentario {
 		this.artigoId = artigoId;
 	}
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "comentario_seq")
-	@SequenceGenerator(name = "comentario_seq", sequenceName = "comentario_sequence")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "comentario_seq")
+	//@SequenceGenerator(name = "comentario_seq", sequenceName = "comentario_sequence")
+	@Column(name = "id_comentario")
 	private long id;
-	@Column(name = "nm_texto", length = 500, nullable = false)
+	@Column(name = "ds_texto", length = 500, nullable = false)
 	private String texto;
 	@ManyToOne
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuarioId;
 	@ManyToOne
+	@JoinColumn(name = "id_relato")
 	private Relato relatoId;
 	@ManyToOne
+	@JoinColumn(name = "id_artigo")
 	private Artigo artigoId;
 	/**
 	 * @return the id

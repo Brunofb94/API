@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "tb_artigo")
 public class Artigo {
 
 
@@ -31,18 +33,23 @@ public class Artigo {
 		this.titulo = titulo;
 		this.texto = texto;
 		this.usuarioId = usuarioId;
+		
 	}
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "artigo_seq")
-	@SequenceGenerator(name = "artigo_seq", sequenceName = "artigo_sequence")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "artigo_seq")
+	//@SequenceGenerator(name = "artigo_seq", sequenceName = "artigo_sequence")
+	@Column(name = "id_artigo")
 	private long id;
 	@Column(name = "nm_titulo", length = 200, nullable = false)
 	private String titulo;
-	@Column(name = "nm_texto", length = 1000, nullable = false)
+	@Column(name = "ds_texto", length = 1000, nullable = false)
 	private String texto;
 	@ManyToOne
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuarioId;
+
 	/**
 	 * @return the id
 	 */

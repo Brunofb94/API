@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.phoenix.APIdaVida.DTO.ArtigoDTO;
 import br.com.fiap.phoenix.APIdaVida.Entity.Artigo;
 import br.com.fiap.phoenix.APIdaVida.Service.ArtigoService;
 
@@ -28,9 +29,14 @@ public class ArtigoController {
 	
 
 	@GetMapping
-	public List<Artigo> getAllArtigos(){
+	public List<ArtigoDTO> getAllArtigos(){
 		return service.getAllArtigo();
 	}
+	@GetMapping("/{id}")
+	public List<ArtigoDTO> getByid(@PathVariable(value = "id") long id){
+		return service.getById(id);
+	}
+	
 	@PostMapping
 	public String save(@Valid @RequestBody Artigo artigo, BindingResult result) {
 		if(result.hasErrors()) {

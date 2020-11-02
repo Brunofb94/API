@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.phoenix.APIdaVida.DTO.CursoCapacitacaoDTO;
 import br.com.fiap.phoenix.APIdaVida.Entity.CursoCapacitacao;
 import br.com.fiap.phoenix.APIdaVida.Service.CursoCapacitacaoService;
 
@@ -28,8 +29,12 @@ public class CursoCapacitacaoController {
 	
 	
 	@GetMapping
-	public List<CursoCapacitacao> getAllCursos(){
+	public List<CursoCapacitacaoDTO> getAllCursos(){
 		return service.AllCursos();
+	}
+	@GetMapping("/{id}")
+	public List<CursoCapacitacaoDTO> getByid(@PathVariable(value = "id") long id){
+		return service.getById(id);
 	}
 	
 	@PostMapping

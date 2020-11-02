@@ -1,6 +1,5 @@
 package br.com.fiap.phoenix.APIdaVida.Controller;
 
-import java.beans.Transient;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.phoenix.APIdaVida.DTO.RelatoDTO;
 import br.com.fiap.phoenix.APIdaVida.Entity.Relato;
-import br.com.fiap.phoenix.APIdaVida.Entity.Usuario;
 import br.com.fiap.phoenix.APIdaVida.Service.RelatoService;
 
 @RestController
@@ -30,8 +29,12 @@ public class RelatoController {
 	
 
 	@GetMapping
-	public List<Relato> getAllRelatos(){
+	public List<RelatoDTO> getAllRelatos(){
 		return service.AllRelatos();
+	}
+	@GetMapping("/{id}")
+	public List<RelatoDTO> getByid(@PathVariable(value = "id") long id){
+		return service.getById(id);
 	}
 	
 	@PostMapping

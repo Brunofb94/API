@@ -7,9 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_Curso_Capacitacao")
 public class CursoCapacitacao {
 	
 	
@@ -36,18 +37,20 @@ public class CursoCapacitacao {
 		this.usuarioId = usuarioId;
 	}
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "cursoCapacitacao_seq")
-	@SequenceGenerator(name = "cursoCapacitacao_seq", sequenceName = "cursoCapacitacao_sequence")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.AUTO, generator = "cursoCapacitacao_seq")
+	//@SequenceGenerator(name = "cursoCapacitacao_seq", sequenceName = "cursoCapacitacao_sequence")
+	@Column(name = "id_Capacitacao")
 	private long id;
 	@Column(name = "nm_titulo", length = 200, nullable = false)
 	private String titulo;
-	@Column(name = "nm_descrisao", length = 1000)
+	@Column(name = "ds_descrisao", length = 1000)
 	private String descricao;
 	@Column(name = "nm_link", length = 200, nullable = false)
 	private String link;
 	@ManyToOne
-	@JoinColumn(name = "fk_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuarioId;
 	/**
 	 * @return the id
